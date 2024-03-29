@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../atoms/button";
-import { cn } from "../../utils/cn";
-import { logo } from "../../images";
+import { cn } from "../utils/cn";
+import { logo } from "../images";
 
 interface HeaderProps {
   setMenu: React.Dispatch<React.SetStateAction<boolean>>;
