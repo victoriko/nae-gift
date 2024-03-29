@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { formatEther } from "@ethersproject/units";
+// import { Link } from "react-router-dom";
+// import { formatEther } from "@ethersproject/units";
 
 interface Product {
   id: number;
@@ -20,10 +20,10 @@ const MyProductList: React.FC<MyProductListProps> = ({ products }) => {
     <>
       <div className="w-full mobile:w-[400px]">
         {products.map((product) => {
-          const priceETH = formatEther(product.price);
+          // const priceETH = formatEther(product.price);
           return (
             <div className="flex flex-col mx-[auto]  h-full " key={product.id}>
-              <Link to={`/product/${product.id}`}>
+              {/* <Link to={`/product/${product.id}`}>
                 <div className="flex flex-row justify-around border rounded-md mt-[20px] h-full hover:scale-90 transition duration-500">
                   <div className="p-[20px] flex flex-row">
                     <span className="mobile:hidden">No.{product.id}</span>
@@ -43,7 +43,7 @@ const MyProductList: React.FC<MyProductListProps> = ({ products }) => {
                     </p>
                   </div>
                 </div>
-              </Link>
+              </Link> */}
             </div>
           );
         })}

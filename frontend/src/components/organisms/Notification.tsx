@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NotificationItem } from "@pushprotocol/uiweb";
+// import { NotificationItem } from "@pushprotocol/uiweb";
 import "../../styles/notification.css";
 
 const NotificationContent = ({ data }: { data: any }) => {
@@ -31,7 +31,7 @@ const NotificationContent = ({ data }: { data: any }) => {
   const progressBarClasses = "progress-bar";
   return (
     <div className={containerClasses} onAnimationEnd={handleAnimationEnd}>
-      <NotificationItem
+      {/* <NotificationItem
         notificationTitle={notificationTitle}
         notificationBody={notificationBody}
         chainName={"ETH_TEST_SEPOLIA"}
@@ -40,7 +40,7 @@ const NotificationContent = ({ data }: { data: any }) => {
         cta={""}
         image={""}
         url={""}
-      />
+      /> */}
       <div className={progressBarClasses}></div>
     </div>
   );

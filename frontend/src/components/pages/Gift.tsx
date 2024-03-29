@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import GiftList from "../components/templates/GiftList";
+import GiftList from "../templates/GiftList";
 import { useRecoilValue } from "recoil";
-import { walletState } from "../recoil/walletState";
+// import { walletState } from "../recoil/walletState";
 
 export interface Product {
   id: number;
@@ -26,7 +26,7 @@ const Gift: React.FC = () => {
   const [receiveOrder, setReceiveOrder] = useState<string>("desc");
   const [payOrder, setPayOrder] = useState<string>("desc");
 
-  const { walletAddress } = useRecoilValue(walletState);
+  // const { walletAddress } = useRecoilValue(walletState);
   const protocol = window.location.href.split("//")[0] + "//";
   const recevieGiftData = async (_walletAddress: string, page: number) => {
     try {
@@ -54,10 +54,10 @@ const Gift: React.FC = () => {
     }
   };
 
-  useEffect((): void => {
-    recevieGiftData(walletAddress, receivePage);
-    payGiftData(walletAddress, payPage);
-  }, [receivePage, payPage, receiveOrder, payOrder, walletAddress]);
+  // useEffect((): void => {
+  //   recevieGiftData(walletAddress, receivePage);
+  //   payGiftData(walletAddress, payPage);
+  // }, [receivePage, payPage, receiveOrder, payOrder, walletAddress]);
 
   const receivePageChange = (pageNumber: number) => {
     setReceivePage(pageNumber);
@@ -77,7 +77,7 @@ const Gift: React.FC = () => {
 
   return (
     <div className="mt-[97px]">
-      <GiftList
+      {/* <GiftList
         payProducts={payProduct}
         receiveProducts={receiveProduct}
         payPage={payPage}
@@ -88,7 +88,7 @@ const Gift: React.FC = () => {
         onPayPageChange={payPageChange}
         onReceiveOrderChange={receiveOrderChange}
         onPayOrderChange={payOrderChange}
-      />
+      /> */}
     </div>
   );
 };
