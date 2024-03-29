@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Main from "../components/pages/Main";
+import Main from "../pages/Main";
 import Header from "../components/organisms/Header";
-import View from "../components/pages/View";
-import ProductWrite from "../components/pages/ProductWrite";
-import MyStoreList from "../components/pages/MyStoreList";
-import Gift from "../components/pages/Gift";
+import View from "../pages/View";
+import ProductWrite from "../pages/ProductWrite";
+import MyStoreList from "../pages/MyStoreList";
+import Gift from "../pages/Gift";
 
 const App: React.FC = () => {
   return (

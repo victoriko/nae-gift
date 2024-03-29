@@ -1,5 +1,5 @@
 import React from "react";
-import { orkBanner, coupleBanner2 } from "../images/Banners";
+import { orkBanner, coupleBanner2 } from "../../images/Banners";
 
 const MainBanner = () => {
   return (

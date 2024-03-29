@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "../pages/Gift";
+import { Product } from "../../pages/Gift";
 import DateTime from "./DateTime";
 import { cn } from "../utils/cn";
 

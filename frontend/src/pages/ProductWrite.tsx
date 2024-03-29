@@ -1,5 +1,5 @@
 import React from "react";
-import RegistSellNft from "../templates/RegistSellNFT";
+import RegistSellNft from "../components/templates/RegistSellNFT";
 
 const ProductWrite: React.FC = () => {
   return (

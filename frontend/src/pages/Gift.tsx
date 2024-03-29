@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import GiftList from "../templates/GiftList";
+import GiftList from "../components/templates/GiftList";
 import { useRecoilValue } from "recoil";
 // import { walletState } from "../recoil/walletState";
 

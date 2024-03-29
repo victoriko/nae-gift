@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import MainBanner from "../molecules/MainBanner";
+import MainBanner from "../components/molecules/MainBanner";
 import axios from "axios";
-import Button from "../atoms/button";
-import ProductList from "../templates/ProductList";
+import Button from "../components/atoms/button";
+import ProductList from "../components/templates/ProductList";
 
 import Pagination from "react-js-pagination";
-import { cn } from "../utils/cn";
+import { cn } from "../components/utils/cn";
 
 export interface Data {
   nextPage: number;
