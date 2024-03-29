@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../organisms/Loading";
-import ViewBox from "../molecules/ViewBox";
+// import ViewBox from "../molecules/ViewBox";
 // import { ethers } from "ethers";
 import ViewDetail from "../molecules/ViewDetail";
 // import { bannerImg1 } from "../images/Banner";
@@ -44,35 +44,35 @@ const View: React.FC = () => {
       }
     };
 
-    const fetchWalletAddress = async () => {
-      if (window.ethereum) {
-        try {
-          // MetaMask에 계정 접근을 요청합니다.
-          const accounts = await window.ethereum.request({
-            method: "eth_requestAccounts",
-          });
-          // 첫 번째 계정을 사용합니다.
-          const account = accounts[0];
-          setUserWalletAddress(account);
-        } catch (error) {
-          console.error(
-            "MetaMask 또는 유사한 웹3 지갑이 설치되어 있지 않습니다."
-          );
-        }
-      } else {
-        console.error(
-          "MetaMask 또는 유사한 웹3 지갑이 설치되어 있지 않습니다."
-        );
-      }
-    };
+    // const fetchWalletAddress = async () => {
+    //   if (window.ethereum) {
+    //     try {
+    //       // MetaMask에 계정 접근을 요청합니다.
+    //       const accounts = await window.ethereum.request({
+    //         method: "eth_requestAccounts",
+    //       });
+    //       // 첫 번째 계정을 사용합니다.
+    //       const account = accounts[0];
+    //       setUserWalletAddress(account);
+    //     } catch (error) {
+    //       console.error(
+    //         "MetaMask 또는 유사한 웹3 지갑이 설치되어 있지 않습니다."
+    //       );
+    //     }
+    //   } else {
+    //     console.error(
+    //       "MetaMask 또는 유사한 웹3 지갑이 설치되어 있지 않습니다."
+    //     );
+    //   }
+    // };
 
     fetchData();
-    fetchWalletAddress();
+    // fetchWalletAddress();
   }, [id]);
 
   return (
     <div className="mt-[97px]">
-      {loading ? (
+      {/* {loading ? (
         <Loading />
       ) : (
         <div className="w-full">
@@ -86,7 +86,7 @@ const View: React.FC = () => {
             />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import useUserAndNotifications from "../../hooks/useInboxNotifications";
+// import useUserAndNotifications from "../../hooks/useInboxNotifications";
 
 interface MyNotificationBoxProps {
   showModal: boolean;
@@ -10,7 +10,7 @@ const MyNotificationBox: React.FC<MyNotificationBoxProps> = ({
   showModal,
   toggleModal,
 }) => {
-  const { inboxNotifications } = useUserAndNotifications();
+  // const { inboxNotifications } = useUserAndNotifications();
 
   if (!showModal) {
     return null;
@@ -42,7 +42,7 @@ const MyNotificationBox: React.FC<MyNotificationBoxProps> = ({
       className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50"
       onClick={handleModalClose}
     >
-      <div
+      {/* <div
         className="relative p-5 border w-96 shadow-lg rounded-md bg-white"
         onClick={handleModalContentClick}
       >
@@ -73,7 +73,7 @@ const MyNotificationBox: React.FC<MyNotificationBoxProps> = ({
             })}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

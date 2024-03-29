@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Inputs, { InputProps } from "../atoms/inputs";
-import { iconsCoin1 } from "../../images/Icon";
+import Inputs, { InputProps } from "../atoms/Input";
+// import { iconsCoin1 } from "../../images/Icon";
 
 interface CoinPriceInput {
   onChange: (value: string) => void;
@@ -31,7 +31,7 @@ const CoinInput: React.FC<CoinPriceInput> = ({ onChange }) => {
       <Inputs
         {...inputProps}
         style={{
-          backgroundImage: `url(${iconsCoin1})`,
+          //   backgroundImage: `url(${iconsCoin1})`,
           backgroundPosition: "10px center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "8%",

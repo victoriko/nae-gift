@@ -1,4 +1,4 @@
-import { loadingCat } from "../../images/Icon";
+import { loadingCat } from "../images/Icons";
 
 const Loading = () => {
   return (

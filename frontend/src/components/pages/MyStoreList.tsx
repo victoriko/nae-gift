@@ -7,7 +7,7 @@ import axios from "axios";
 import Button from "../atoms/button";
 // import { copyIcon } from "../images/Icon";
 // import { personIcon } from "../images/Icon";
-import StoreBanner from "../molecules/StoreBanner";
+// import StoreBanner from "../molecules/StoreBanner";
 // import { itemIcon } from "../images/Icon";
 // import { saleIcon } from "../images/Icon";
 // import { useObserver } from "../hooks/useObserver";
@@ -64,8 +64,8 @@ const MyStoreList: React.FC = () => {
   const [showBanner, setShowBanner] = useState<boolean>(true);
   const [showModal, setShowModal] = useState(false);
   const [isFocused, setIsfocused] = useState(0);
-  const refKeyword = useObserver(1, setIsfocused);
-  const refCategory = useObserver(2, setIsfocused);
+  // const refKeyword = useObserver(1, setIsfocused);
+  // const refCategory = useObserver(2, setIsfocused);
   const protocol = window.location.href.split("//")[0] + "//";
   const changePage = async (pageNumber: number) => {
     setPage(pageNumber);
@@ -75,28 +75,28 @@ const MyStoreList: React.FC = () => {
     setPage(pageNumber);
   };
 
-  useEffect(() => {
-    const getWalletAddress = async () => {
-      if (window.ethereum) {
-        try {
-          await window.ethereum.request({
-            method: "eth_requestAccounts",
-          });
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const signer = provider.getSigner();
-          const userAddress = await signer.getAddress();
+  // useEffect(() => {
+  //   const getWalletAddress = async () => {
+  //     if (window.ethereum) {
+  //       try {
+  //         await window.ethereum.request({
+  //           method: "eth_requestAccounts",
+  //         });
+  //         const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //         const signer = provider.getSigner();
+  //         const userAddress = await signer.getAddress();
 
-          setSeller(userAddress);
-        } catch (error) {
-          console.log("자갑주소 가져오기 에러", error);
-        }
-      } else {
-        console.log("메타마스크 설치하십시오");
-      }
-    };
+  //         setSeller(userAddress);
+  //       } catch (error) {
+  //         console.log("자갑주소 가져오기 에러", error);
+  //       }
+  //     } else {
+  //       console.log("메타마스크 설치하십시오");
+  //     }
+  //   };
 
-    getWalletAddress();
-  }, []);
+  //   getWalletAddress();
+  // }, []);
 
   const fetchData = async () => {
     try {
@@ -181,7 +181,7 @@ const MyStoreList: React.FC = () => {
 
   return (
     <div className="mt-[97px]">
-      <div
+      {/* <div
         className={`transition-opacity duration-500 ${
           showBanner ? "opacity-100" : "opacity-0"
         }`}
@@ -335,7 +335,7 @@ const MyStoreList: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
