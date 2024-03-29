@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Button from "../atoms/button";
 import axios from "axios";
-// import { runEthers } from "../../utils/ethers";
+import { runEthers } from "../utils/ethers";
 import Loading from "../organisms/Loading";
-// import { ethers } from "ethers";
+import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
 
 interface ModalProps {
@@ -26,44 +26,44 @@ const WriteModal: React.FC<ModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const protocol = window.location.href.split("//")[0] + "//";
   const navigate = useNavigate();
-  // const handleRegistration = async () => {
-  //   onClose();
-  //   setIsLoading(true);
-  //   const ethPrice = ethers.utils.parseUnits(price, "ether").toString();
-  //   try {
-  //     const { signature } = await runEthers(title, content, ethPrice);
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-  //     formData.append("title", title);
-  //     formData.append("content", content);
-  //     formData.append("price", ethPrice);
-  //     formData.append("signature", signature);
+  const handleRegistration = async () => {
+    onClose();
+    setIsLoading(true);
+    const ethPrice = ethers.utils.parseUnits(price, "ether").toString();
+    try {
+      const { signature } = await runEthers(title, content, ethPrice);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("price", ethPrice);
+      formData.append("signature", signature);
 
-  //     const response = await axios.post(
-  //       `${process.env.REACT_APP_API}/product`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  //     const productId = response.data.id;
-  //     if (response.status === 404) {
-  //       alert("Page Not Found.");
-  //       navigate("/");
-  //     } else {
-  //       navigate(`/product/${productId}`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error registering product:", error);
-  //     navigate("/");
-  //   } finally {
-  //     setTimeout(() => {
-  //       setIsLoading(false);
-  //     }, 2000);
-  //   }
-  // };
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}/product`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const productId = response.data.id;
+      if (response.status === 404) {
+        alert("Page Not Found.");
+        navigate("/");
+      } else {
+        navigate(`/product/${productId}`);
+      }
+    } catch (error) {
+      console.error("Error registering product:", error);
+      navigate("/");
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black opacity-80">
@@ -81,7 +81,7 @@ const WriteModal: React.FC<ModalProps> = ({
           variant="sendBtn1"
           size="mdl"
           label="Register"
-          // onClick={handleRegistration}
+          onClick={handleRegistration}
         />
       </div>
     </div>

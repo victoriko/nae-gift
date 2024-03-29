@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Loading from "../organisms/Loading";
+import Loading from "../components/organisms/Loading";
 // import ViewBox from "../molecules/ViewBox";
 // import { ethers } from "ethers";
-import ViewDetail from "../molecules/ViewDetail";
+import ViewDetail from "../components/molecules/ViewDetail";
 // import { bannerImg1 } from "../images/Banner";
 
 export interface Product {

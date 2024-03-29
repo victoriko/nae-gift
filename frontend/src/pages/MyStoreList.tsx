@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import MyProductList from "../templates/MyProductList";
-import MyVerifiedBox from "../templates/MyVerifiedBox";
+import MyProductList from "../components/templates/MyProductList";
+import MyVerifiedBox from "../components/templates/MyVerifiedBox";
 import axios from "axios";
 // import { ethers } from "ethers";
 // import Pagination from "react-js-pagination";
-import Button from "../atoms/button";
+import Button from "../components/atoms/button";
 // import { copyIcon } from "../images/Icon";
 // import { personIcon } from "../images/Icon";
 // import StoreBanner from "../molecules/StoreBanner";
@@ -12,7 +12,7 @@ import Button from "../atoms/button";
 // import { saleIcon } from "../images/Icon";
 // import { useObserver } from "../hooks/useObserver";
 // import { messageIcon } from "../images/Icon";
-import MyNotificationBox from "../templates/MyNotificationBox";
+import MyNotificationBox from "../components/templates/MyNotificationBox";
 
 export interface Data {
   nextPage: number;
