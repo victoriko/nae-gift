@@ -1,7 +1,11 @@
 import React from "react";
-
+import MainBanner from "../molecules/MainBanner";
 const Main = () => {
-  return <div className="w-2 border">메인</div>;
+  return (
+    <div className="">
+      <MainBanner />
+    </div>
+  );
 };
 
 export default Main;
