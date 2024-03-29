@@ -6,6 +6,7 @@ import metamaskLogo1 from "./metamask_logo.png";
 import metamaskLogo2 from "./metamask_logo_2.png";
 import personIcon from "./personIcon.png";
 import loadingCat from "./loadingCat.gif";
+import ethIcon from "./ethIcon.png";
 
 export {
   iconsGithub2,
@@ -16,4 +17,5 @@ export {
   metamaskLogo2,
   personIcon,
   loadingCat,
+  ethIcon,
 };

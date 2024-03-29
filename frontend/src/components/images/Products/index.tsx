@@ -1,7 +1,3 @@
-import React from "react";
+import viewIMG from "./viewIMG.png";
 
-const index = () => {
-  return <div></div>;
-};
-
-export default index;
+export { viewIMG };
