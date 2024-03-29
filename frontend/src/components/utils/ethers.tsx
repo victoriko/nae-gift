@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-
+import Swal from "sweetalert2";
 declare global {
   interface Window {
     ethereum?: any;
@@ -13,7 +13,7 @@ export async function runEthers(
 ) {
   try {
     if (!window.ethereum) {
-      throw new Error("Ethereum 지갑을 찾을 수 없습니다.");
+      throw new Error("Cannot find Ethereum wallet.");
     }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -45,7 +45,10 @@ export async function runEthers(
     return { message, signature };
   } catch (error) {
     console.error("Error running ethers:", error);
-    alert("서명이 거부되었습니다. 다시 시도해주세요.");
+    Swal.fire({
+      icon: "error",
+      text: "Signature denied. Please try again.",
+    });
     throw error;
   }
 }
