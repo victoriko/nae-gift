@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Main from "../components/page/Main";
+import Main from "../components/pages/Main";
 
 const App: React.FC = () => {
   return (
