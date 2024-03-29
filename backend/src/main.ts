@@ -15,12 +15,9 @@ async function bootstrap() {
     .setTitle('Nae-Gift')
     .setDescription('Nae-Gift API description')
     .setVersion('0.11.0')
-    .addTag('Market')
-    .addTag('Market > Product')
-    .addTag('Market > Store')
+    .addTag('Main')
+    .addTag('Product')
     .addTag('Gift')
-    .addTag('VC')
-    .addTag('Notification')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
