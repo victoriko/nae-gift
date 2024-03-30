@@ -14,6 +14,9 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  images: {
+    domains: ["localhost"], // Add the domains you want to allow
+  },
 };
 
 module.exports = nextConfig;
