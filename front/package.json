@@ -43,5 +43,9 @@
     "next": "~14.0.4",
     "vercel": "~32.4.1"
   },
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@3.2.3",
+  "dependencies": {
+    "viem": "^2.9.5",
+    "wagmi": "^2.5.16"
+  }
 }
