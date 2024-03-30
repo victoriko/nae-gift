@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Main from "../pages/Main";
+import Main from "../pages";
 import Header from "../components/organisms/Header";
 import View from "../pages/View";
 import ProductWrite from "../pages/ProductWrite";

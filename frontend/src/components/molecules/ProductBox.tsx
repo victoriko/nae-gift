@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ethIcon } from "../../images/Icons";
-import { Product } from "../../pages/Main";
+import { Product } from "../../pages";
 import { viewIMG } from "../../images/Products";
 import { formatEther } from "@ethersproject/units";
 import { cn } from "../utils/cn";
