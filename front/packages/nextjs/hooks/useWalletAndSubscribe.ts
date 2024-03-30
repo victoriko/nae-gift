@@ -32,20 +32,20 @@ const useWalletAndSubscribe = () => {
       if (isConnected && address) {
         console.log(walletClient);
         console.log(`wallet ${address} is connected`);
-        // const initializedUser = await PushAPI.initialize(walletClient, {
-        //   env: CONSTANTS.ENV.STAGING,
-        // });
-        // setUser(initializedUser);
+        const initializedUser = await PushAPI.initialize(walletClient, {
+          env: CONSTANTS.ENV.STAGING,
+        });
+        setUser(initializedUser);
 
-        // const subscriptions = await initializedUser.notification.subscriptions();
-        // const isSubscribed = subscriptions.some(
-        //   (sub: any) => sub.channel.toLowerCase() === channelAddress.toLowerCase(),
-        // );
-        // if (!isSubscribed) {
-        //   await initializedUser.notification.subscribe(`eip155:11155111:${channelAddress}`);
-        // }
+        const subscriptions = await initializedUser.notification.subscriptions();
+        const isSubscribed = subscriptions.some(
+          (sub: any) => sub.channel.toLowerCase() === channelAddress.toLowerCase(),
+        );
+        if (!isSubscribed) {
+          await initializedUser.notification.subscribe(`eip155:11155111:${channelAddress}`);
+        }
 
-        // await initRealTimeNotificationStream(initializedUser);
+        await initRealTimeNotificationStream(initializedUser);
       }
     };
 
