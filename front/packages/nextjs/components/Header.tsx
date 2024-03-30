@@ -101,7 +101,7 @@ export const Header = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-bold leading-tight">Naegift-ETH</span>
-            <span className="text-xs">Ethereum marcket place</span>
+            <span className="text-xs">Ethereum Market place</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
