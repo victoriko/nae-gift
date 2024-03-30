@@ -12,7 +12,7 @@ export class AppController {
 
   @Get()
   @ApiOkResponse({ type: ResGetProducts })
-  @ApiOperation({ summary: 'Get all products' })
+  @ApiOperation({ summary: 'Get all products (Paginated)' })
   async getProducts(
     @Query('page', ParseIntPipe) page: number,
     @Query('order') order: Order,
