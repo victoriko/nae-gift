@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 // import { useParams } from "react-router";
-import { useRouter } from "next/router";
+import { useParams, useRouter } from "next/navigation";
 import { ESCROW_ABI } from "../../abi/escrow";
+
 import { closeBtn } from "../../images/Icon";
 import { walletState } from "../../recoil/walletState";
 import { cn } from "../../utils/cn";
@@ -28,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
   const { address: walletAddress } = useAccount();
   const priceETH = formatEther(product.price);
   const navigate = useRouter();
-  const { id } = navigate.query;
+  const { id } = useParams();
 
   const protocol = window.location.href.split("//")[0] + "//";
 

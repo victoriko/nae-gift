@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import useWalletAndSuscribe from "../../hooks/useWalletAndSuscribe";
 import Button from "../atoms/button";
-import { useAccount } from "wagmi";
+// import { useAccount } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
-import useRequestSignature from "~~/hooks/useRequestSignature";
-import useWalletAndSubscribe from "~~/hooks/useWalletAndSubscribe";
+
+// import useWalletAndSubscribe from "~~/hooks/useWalletAndSubscribe";
 
 type HeaderMenuLink = {
   label: string;
@@ -67,27 +66,12 @@ export const HeaderMenuLinks = () => {
 export const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { isConnected } = useWalletAndSubscribe();
-  const { signedMessage } = useRequestSignature();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset;
-      const scrolled = scrollTop > 10;
-      setIsScrolled(scrolled);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   useOutsideClick(
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
   );
+  // const { isConnected } = useWalletAndSubscribe();
+
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
       <div className="navbar-start w-auto lg:w-1/2">
@@ -154,8 +138,7 @@ export const Header = () => {
         </Link>
       </div>
       <div className="navbar-end flex-grow mr-4">
-        {signedMessage ? "" : ""}
-        {isConnected ? "" : ""}
+        {/* {isConnected ? "" : ""} */}
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>

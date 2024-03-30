@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { Product } from "../../app/product/[id]/page";
+
 import { cn } from "../../utils/cn";
 import { runEthers } from "../../utils/ethers";
 import Button from "../atoms/button";

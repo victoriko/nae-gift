@@ -42,11 +42,13 @@ const WriteModal: React.FC<ModalProps> = ({ onClose, title, content, file, price
       const productId = response.data.id;
       console.log("productId", productId);
 
-      if (response.status === 404) {
+      if (response.status === 200) {
+        const productId = response.data.id;
+        console.log("productId", productId);
+        router.push(`/product/${productId}`);
+      } else if (response.status === 404) {
         alert("Page Not Found.");
         router.push("/");
-      } else {
-        router.push(`/product/${productId}`);
       }
     } catch (error) {
       console.error("Error registering product:", error);
