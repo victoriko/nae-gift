@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "../atoms/button";
-import axios from "axios";
 // import { runEthers } from "../../utils/ethers";
-// import Loading from "../organisms/Loading";
+import Loading from "../organisms/Loading";
+import axios from "axios";
 import { ethers } from "ethers";
 
 interface ModalProps {
@@ -20,8 +20,8 @@ const WriteModal: React.FC<ModalProps> = ({ onClose, title, content, file, price
   const protocol = window.location.href.split("//")[0] + "//";
   //   const navigate = useNavigate();
   const handleRegistration = async () => {
-    // onClose();
-    // setIsLoading(true);
+    onClose();
+    setIsLoading(true);
     // const ethPrice = ethers.utils.parseUnits(price, "ether").toString();
     // try {
     //   const { signature } = await runEthers(title, content, ethPrice);
