@@ -111,12 +111,12 @@ export class ProductService {
       );
       const contract = new ethers.Contract(
         process.env.PROXY_CONTRACT,
-        ESCROW_ABI as any,
+        ESCROW_ABI,
         provider,
       );
-      console.log('생성 전');
+      console.log('Before Deposit');
       const eventPromise = new Promise(async (resolve, rej) => {
-        console.log('이벤트 대기중');
+        console.log('Waiting for the deposit');
 
         const currentBlock = await provider.getBlockNumber();
 
@@ -135,10 +135,10 @@ export class ProductService {
         );
 
         if (filteredEvents.length) {
-          console.log('과거 이벤트 발견');
+          console.log('Active by past event reference.');
 
           filteredEvents.forEach(async (event) => {
-            console.log(uuid, event.args.uuid, 'UUID 일치 확인');
+            console.log(uuid, event.args.uuid, 'UUID Confirmation');
             const product = await this.getProduct(id);
             newGift = await this.giftRepo.save({
               buyer,
@@ -154,11 +154,11 @@ export class ProductService {
             resolve(newGift);
           });
         } else {
-          console.log('과거 이벤트 미발견, 이벤트 구독');
+          console.log('No past events, subscribing to the event.');
           const handler = async (escrowUUID) => {
-            console.log('이벤트 발생');
+            console.log('Event Emitted');
             if (uuid === escrowUUID) {
-              console.log('UUID 일치');
+              console.log('UUID Confirmation');
               const product = await this.getProduct(id);
               newGift = await this.giftRepo.save({
                 buyer,
