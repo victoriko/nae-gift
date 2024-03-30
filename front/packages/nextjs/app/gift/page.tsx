@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import GiftList from "../../components/templates/GiftList";
+import { walletState } from "../../recoil/walletState";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { Address } from "~~/components/scaffold-eth";
@@ -27,7 +28,7 @@ const Gift: React.FC = () => {
   const [payTotalPage, setPayTotalPage] = useState<number>(1);
   const [receiveOrder, setReceiveOrder] = useState<string>("desc");
   const [payOrder, setPayOrder] = useState<string>("desc");
-
+  const { walletAddress } = useRecoilValue(walletState);
   const protocol = window.location.href.split("//")[0] + "//";
   const recevieGiftData = async (_walletAddress: string, page: number) => {
     try {
@@ -54,6 +55,11 @@ const Gift: React.FC = () => {
       console.log(error);
     }
   };
+
+  useEffect((): void => {
+    recevieGiftData(walletAddress, receivePage);
+    payGiftData(walletAddress, payPage);
+  }, [receivePage, payPage, receiveOrder, payOrder, walletAddress]);
 
   const receivePageChange = (pageNumber: number) => {
     setReceivePage(pageNumber);

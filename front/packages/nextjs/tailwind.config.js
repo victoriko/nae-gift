@@ -82,5 +82,10 @@ module.exports = {
         "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
+    screens: {
+      mobile: { min: "320px", max: "767px" },
+      tablet: { min: "768px", max: "1439px" },
+      note: { max: "1440px" },
+    },
   },
 };

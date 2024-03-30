@@ -10,7 +10,7 @@ import axios from "axios";
 import type { NextPage } from "next";
 import Pagination from "react-js-pagination";
 import { useAccount } from "wagmi";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
 export interface Data {
@@ -34,8 +34,6 @@ const Home: NextPage = () => {
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [order, setOrder] = useState<string>("asc");
-  const [showBanner, setShowBanner] = useState<boolean>(true);
-  const [scrollPosition, setScrollPosition] = useState<number>(0);
 
   const changePage = async (pageNumber: number) => {
     setPage(pageNumber);
@@ -55,7 +53,7 @@ const Home: NextPage = () => {
   const latestData = async () => {
     try {
       const latestRes = await axios.get<Data>(`${process.env.REACT_APP_API}/?page=1&order=desc`);
-      // console.log(latestRes.data.products);
+      console.log(latestRes.data.products);
       setLatestProduct(latestRes.data.products);
     } catch (error) {
       console.log(error);
@@ -77,22 +75,15 @@ const Home: NextPage = () => {
         <div>
           <MainBanner />
         </div>
-        <div className="px-5">
-          <h1 className="text-center">
+        <div className="px-5 flex-grow w-full pt-[10%] flex flex-col items-center justify-center absolute mobile:pt-[5%]">
+          <h1 className="text-center mb-8">
             <span className="block text-2xl mb-2">Welcome to</span>
             <span className="block text-4xl font-bold">Naegift</span>
           </h1>
-          <div className="flex justify-center items-center space-x-2">
+          <div className="flex justify-center items-center space-x-2 mb-8">
             <p className="my-2 font-medium">Connected Address:</p>
             <Address address={connectedAddress} />
           </div>
-          <p className="text-center text-lg">
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block"></code>
-          </p>
-          <p className="text-center text-lg">
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block"></code>{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block"></code>
-          </p>
         </div>
 
         <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
