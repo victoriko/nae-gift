@@ -1,5 +1,6 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import { Metadata } from "next";
+import { RecoilRoot } from "recoil";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";

@@ -1,5 +1,7 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { comIcon, iconsGithub2 } from "../images/Icon";
 import { hardhat } from "viem/chains";
 import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
@@ -47,8 +49,8 @@ export const Footer = () => {
         <ul className="menu menu-horizontal w-full">
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="text-center">
-              <a href="https://github.com/scaffold-eth/se-2" target="_blank" rel="noreferrer" className="link">
-                Fork me
+              <a href="https://github.com/victoriko/nae-gift" target="_blank" rel="noreferrer" className="link">
+                <Image src={iconsGithub2} alt="" className="w-[30px] h-[30px]" />
               </a>
             </div>
             <span>·</span>
@@ -58,18 +60,18 @@ export const Footer = () => {
               </p>
               <a
                 className="flex justify-center items-center gap-1"
-                href="https://buidlguidl.com/"
+                href="https://authrium.com/home_kor.html"
                 target="_blank"
                 rel="noreferrer"
               >
-                <BuidlGuidlLogo className="w-3 h-5 pb-1" />
-                <span className="link">BuidlGuidl</span>
+                <Image src={comIcon} alt="" className="w-[10px] h-[10px]" />
+                <span className="link">Authrium</span>
               </a>
             </div>
             <span>·</span>
             <div className="text-center">
-              <a href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA" target="_blank" rel="noreferrer" className="link">
-                Support
+              <a href="https://www.kiweb.or.kr/main" target="_blank" rel="noreferrer" className="link">
+                kiweb
               </a>
             </div>
           </div>
