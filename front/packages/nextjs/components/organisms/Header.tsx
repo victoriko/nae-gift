@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // import useWalletAndSuscribe from "../../hooks/useWalletAndSuscribe";
-import Button from "./atoms/button";
+import Button from "../atoms/button";
 import { useRecoilState } from "recoil";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
