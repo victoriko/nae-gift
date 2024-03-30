@@ -46,9 +46,10 @@ const Home: NextPage = () => {
       setProduct(response.data.products);
       setTotalPage(response.data.totalPages);
     } catch (error) {
-      console.log(error);
+      console.log("response", error);
     }
   };
+  console.log(`${process.env.NEXT_PUBLIC_API_URL}`);
 
   const latestData = async () => {
     try {
@@ -56,7 +57,7 @@ const Home: NextPage = () => {
       console.log(latestRes.data.products);
       setLatestProduct(latestRes.data.products);
     } catch (error) {
-      console.log(error);
+      console.log("latestRes", error);
     }
   };
 
