@@ -6,12 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 // import useWalletAndSuscribe from "../../hooks/useWalletAndSuscribe";
 import Button from "../atoms/button";
-import { useAccount } from "wagmi";
+import { useRecoilState } from "recoil";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
-import useRequestSignature from "~~/hooks/useRequestSignature";
-import useWalletAndSubscribe from "~~/hooks/useWalletAndSubscribe";
 
 type HeaderMenuLink = {
   label: string;
@@ -71,8 +69,6 @@ export const Header = () => {
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
   );
-  const { isConnected } = useWalletAndSubscribe();
-  const { signedMessage } = useRequestSignature();
 
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
@@ -140,8 +136,6 @@ export const Header = () => {
         </Link>
       </div>
       <div className="navbar-end flex-grow mr-4">
-        {signedMessage ? "" : ""}
-        {isConnected ? "" : ""}
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>
