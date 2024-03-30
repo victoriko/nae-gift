@@ -45,6 +45,7 @@
   },
   "packageManager": "yarn@3.2.3",
   "dependencies": {
+    "react-paginate": "^8.2.0",
     "viem": "^2.9.5",
     "wagmi": "^2.5.16"
   }
