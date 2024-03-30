@@ -9,26 +9,28 @@ export const getMetadata = ({
   description: string;
   imageRelativePath?: string;
 }): Metadata => {
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : `http://localhost:${process.env.PORT || 3000}`;
-  const imageUrl = `${baseUrl}${imageRelativePath}`;
+  // Use NEXT_PUBLIC_API_URL as the base URL, with a fallback to localhost for development
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || `http://localhost:${process.env.PORT || 3000}`;
+
+  // Ensure the image URL is formed correctly, relative to the base URL
+  const imageUrl = `${baseUrl}${imageRelativePath.startsWith("/") ? "" : "/"}${imageRelativePath}`;
+
   return {
-    title: title,
-    description: description,
+    title,
+    description,
     openGraph: {
-      title: title,
-      description: description,
+      title,
+      description,
       images: [
         {
-          url: imageUrl,
+          url: imageUrl, // Use the fully formed image URL here
         },
       ],
     },
     twitter: {
-      title: title,
-      description: description,
-      images: [imageUrl],
+      title,
+      description,
+      images: [imageUrl], // And here
     },
   };
 };
