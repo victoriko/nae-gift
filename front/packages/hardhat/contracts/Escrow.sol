@@ -49,12 +49,14 @@ contract NaegiftEscrow {
     }
 
     function ConfirmFulfillment(string memory uuid)public{
+        require(msg.sender == escrows[uuid].market, "e020");
         require(escrows[uuid].State == ContractChoices.ACTIVE, "e004");
         escrows[uuid].State = ContractChoices.FULFILLED;
         emit FulfillmentConfirmed(uuid, escrows[uuid].market);
     }
 
     function ConfirmProductUsed(string memory uuid) public{
+        require(msg.sender == escrows[uuid].market, "e020");
         require(escrows[uuid].State == ContractChoices.FULFILLED, "e005");
         escrows[uuid].State = ContractChoices.EXECUTED;
         emit ProductUsedConfirmed(uuid, escrows[uuid].receiver);
