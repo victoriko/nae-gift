@@ -2,16 +2,17 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../../app/page";
+import { ethIcon } from "../../images/Icon/index";
 import { viewImg1 } from "../../images/Product";
-// import { formatEther } from "@ethersproject/units";
 import { cn } from "../../utils/cn";
+import { formatEther } from "@ethersproject/units";
 
 interface iProductBox {
   product: Product;
 }
 
 const ProductBox: React.FC<iProductBox> = ({ product }) => {
-  //   const priceETH = formatEther(product.price);
+  const priceETH = formatEther(product.price);
 
   return (
     <Link href={`/product/${product.id}`} passHref>
@@ -35,8 +36,8 @@ const ProductBox: React.FC<iProductBox> = ({ product }) => {
         <div className="">
           <p className="py-2 pl-2 text-xl font-extrabold  ">{product.title}</p>
           <div className="flex flex-row p-2">
-            {/* <img src={ethIcon} alt="" className="w-[30px] h-[30px]" /> */}
-            <p className="text-[18px] text-slate-400 pl-2">{/* {priceETH} ETH */}ETh</p>
+            <Image src={ethIcon} alt="" className="w-[30px] h-[30px]" />
+            <p className="text-[18px] text-slate-400 pl-2">{priceETH} ETH</p>
           </div>
         </div>
       </div>

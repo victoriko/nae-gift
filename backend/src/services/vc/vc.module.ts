@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { VcService } from './vc.service';
 
 @Module({
-  providers: [VcService]
+  exports: [VcService],
+  providers: [VcService],
 })
 export class VcModule {}
