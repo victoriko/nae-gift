@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { runEthers } from "../../utils/ethers";
 import Button from "../atoms/button";
-// import { runEthers } from "../../utils/ethers";
 import Loading from "../organisms/Loading";
 import axios from "axios";
 import { ethers } from "ethers";
@@ -17,49 +18,49 @@ interface ModalProps {
 
 const WriteModal: React.FC<ModalProps> = ({ onClose, title, content, file, price }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const protocol = window.location.href.split("//")[0] + "//";
-  //   const navigate = useNavigate();
+  // const protocol = window.location.href.split("//")[0] + "//";
+  const router = useRouter();
+
   const handleRegistration = async () => {
     onClose();
     setIsLoading(true);
-    // const ethPrice = ethers.utils.parseUnits(price, "ether").toString();
-    // try {
-    //   const { signature } = await runEthers(title, content, ethPrice);
-    //   const formData = new FormData();
-    //   formData.append("file", file);
-    //   formData.append("title", title);
-    //   formData.append("content", content);
-    //   formData.append("price", ethPrice);
-    //   formData.append("signature", signature);
-    //   const response = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_API_URL}/product`,
-    //     formData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-    //   const productId = response.data.id;
-    //   if (response.status === 404) {
-    //     alert("Page Not Found.");
-    //     navigate("/");
-    //   } else {
-    //     navigate(`/product/${productId}`);
-    //   }
-    // } catch (error) {
-    //   console.error("Error registering product:", error);
-    //   navigate("/");
-    // } finally {
-    //   setTimeout(() => {
-    //     setIsLoading(false);
-    //   }, 2000);
-    // }
+    const ethPrice = ethers.utils.parseUnits(price, "ether").toString();
+    try {
+      const { signature } = await runEthers(title, content, ethPrice);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("price", ethPrice);
+      formData.append("signature", signature);
+
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/product`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const productId = response.data.id;
+      console.log("productId", productId);
+
+      if (response.status === 404) {
+        alert("Page Not Found.");
+        router.push("/");
+      } else {
+        router.push(`/product/${productId}`);
+      }
+    } catch (error) {
+      console.error("Error registering product:", error);
+      router.push("/");
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    }
   };
 
   return (
     <div className="fixed inset-0 bg-black opacity-80">
-      {/* {isLoading && <Loading />} */}
+      {isLoading && <Loading />}
       <div className="w-full y-full flex justify-center flex-col items-center mt-[200px] gap-y-10">
         <p className="text-white">Title: {title}</p>
         <p className="text-white text-wrap">Item: {file ? file.name : ""}</p>
