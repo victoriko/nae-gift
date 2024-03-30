@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Product } from "../../pages/Main";
+import { Product } from "../../pages";
 import ProductBox from "../molecules/ProductBox";
 
 interface mainData {
