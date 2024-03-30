@@ -3,12 +3,13 @@ import Image from "next/image";
 // import { useParams } from "react-router";
 import { useParams, useRouter } from "next/navigation";
 import { ESCROW_ABI } from "../../abi/escrow";
-import { Product } from "../../app/product/[id]/page";
+
 import { closeBtn } from "../../images/Icon";
 import { walletState } from "../../recoil/walletState";
 import { cn } from "../../utils/cn";
 import Button from "../atoms/button";
 import Inputs from "../atoms/inputs";
+import { Product } from "../templates/ProductPage";
 import { ExternalProvider } from "@ethersproject/providers";
 import { formatEther } from "@ethersproject/units";
 import axios from "axios";

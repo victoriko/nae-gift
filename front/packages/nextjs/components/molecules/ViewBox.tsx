@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Product } from "../../app/product/[id]/page";
+
 import { cn } from "../../utils/cn";
 import { runEthers } from "../../utils/ethers";
 import Button from "../atoms/button";
+import { Product } from "../templates/ProductPage";
 import Modal from "./Modal";
 import { formatEther } from "@ethersproject/units";
 import axios from "axios";
