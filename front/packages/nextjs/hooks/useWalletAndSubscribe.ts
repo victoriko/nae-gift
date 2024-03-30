@@ -1,213 +1,66 @@
-import { useEffect, useState } from "react";
-import { CONSTANTS, PushAPI } from "@pushprotocol/restapi";
-import { useAccount, useWalletClient } from "wagmi";
-
-const useWalletAndSubscribe = () => {
-  const { address, isConnected } = useAccount();
-  const [notificationData, setNotificationData] = useState<any[]>([]);
-  const [streamInstance, setStreamInstance] = useState<any | null>(null);
-  const [user, setUser] = useState<any | null>(null);
-  const { data: walletClient } = useWalletClient();
-
-  const channelAddress = "0x3C51F308502c5fde8c7C1Fa39d35aA621838F7DF";
-
-  const initRealTimeNotificationStream = async (user: any) => {
-    if (!streamInstance && user) {
-      try {
-        const newStream = await user.initStream([CONSTANTS.STREAM.NOTIF]);
-        newStream.on(CONSTANTS.STREAM.NOTIF, (data: any) => {
-          console.log("받은 데이터:", data.message.notification);
-          setNotificationData((oldData: any) => [...oldData, data]);
-        });
-        newStream.connect();
-        setStreamInstance(newStream);
-      } catch (error) {
-        console.error("스트림 초기화 중 오류 발생:", error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    const connectAndSubscribe = async () => {
-      if (isConnected && address) {
-        console.log(walletClient);
-        console.log(`wallet ${address} is connected`);
-        const initializedUser = await PushAPI.initialize(walletClient, {
-          env: CONSTANTS.ENV.STAGING,
-        });
-        setUser(initializedUser);
-
-        const subscriptions = await initializedUser.notification.subscriptions();
-        const isSubscribed = subscriptions.some(
-          (sub: any) => sub.channel.toLowerCase() === channelAddress.toLowerCase(),
-        );
-        if (!isSubscribed) {
-          await initializedUser.notification.subscribe(`eip155:11155111:${channelAddress}`);
-        }
-
-        await initRealTimeNotificationStream(initializedUser);
-      }
-    };
-
-    connectAndSubscribe();
-  }, [isConnected, address]);
-
-  return isConnected;
-};
-
-export default useWalletAndSubscribe;
-
 // import { useEffect, useState } from "react";
-// import { streamIdState } from "../recoil/streamState";
-// import { walletState } from "../recoil/walletState";
 // import { CONSTANTS, PushAPI } from "@pushprotocol/restapi";
-// import { ethers } from "ethers";
-// import { useRecoilState } from "recoil";
+// import { useAccount, useWalletClient } from "wagmi";
 
-// // 사용자 지갑과 구독을 관리하는 커스텀 훅
 // const useWalletAndSubscribe = () => {
+//   const { address, isConnected } = useAccount();
 //   const [notificationData, setNotificationData] = useState<any[]>([]);
 //   const [streamInstance, setStreamInstance] = useState<any | null>(null);
 //   const [user, setUser] = useState<any | null>(null);
-//   const [sellerWallets, setSellerWallets] = useRecoilState(walletState);
-//   const [streamId, setStreamId] = useRecoilState(streamIdState);
+//   // useWalletClient 훅을 사용하여 현재 연결된 지갑 주소를 매개변수로 전달합니다.
+//   const result1 = useWalletClient({
+//     chainId: 11155111,
+//   });
 
-//   // 채널 주소
 //   const channelAddress = "0x3C51F308502c5fde8c7C1Fa39d35aA621838F7DF";
 
-//   // 실시간 알림 스트림 초기화
-// const initRealTimeNotificationStream = async (user: any) => {
-//   if (!streamInstance && sellerWallets.walletAddress && user) {
-//     try {
-//       const newStream = await user.initStream([CONSTANTS.STREAM.NOTIF]);
-//       newStream.on(CONSTANTS.STREAM.NOTIF, (data: any) => {
-//         console.log("받은 데이터:", data.message.notification);
-//         setNotificationData((oldData: any) => [...oldData, data]);
-//       });
-//       // console.log("스트림 초기화 완료:", newStream);
-//       newStream.connect();
-//       setStreamInstance(newStream);
-//       setStreamId(newStream.id);
-//     } catch (error) {
-//       console.error("스트림 초기화 중 오류 발생:", error);
-//     }
-//   }
-// };
-
-//   // 지갑 연결
-//   const connectWallet = async () => {
-//     if (!window.ethereum) {
-//       alert("메타마스크를 설치해주세요.");
-//       return;
-//     }
-
-//     const provider = new ethers.providers.Web3Provider(window.ethereum);
-//     const wallets = await provider.send("eth_requestAccounts", []);
-//     const signer = provider.getSigner(wallets[0]);
-
-//     const handleChainChanged = async (chainId: string) => {
-//       console.log(chainId);
-
-//       if (chainId !== "0xaa36a7") {
-//         await window.ethereum.request({
-//           method: "wallet_switchEthereumChain",
-//           params: [
-//             {
-//               chainId: "0xaa36a7",
-//             },
-//           ],
+//   const initRealTimeNotificationStream = async (user: any) => {
+//     if (!streamInstance && user) {
+//       try {
+//         const newStream = await user.initStream([CONSTANTS.STREAM.NOTIF]);
+//         newStream.on(CONSTANTS.STREAM.NOTIF, (data: any) => {
+//           console.log("받은 데이터:", data.message.notification);
+//           setNotificationData((oldData: any) => [...oldData, data]);
 //         });
-//         window.location.reload();
+//         newStream.connect();
+//         setStreamInstance(newStream);
+//       } catch (error) {
+//         console.error("스트림 초기화 중 오류 발생:", error);
 //       }
-//     };
-
-//     const chainId = await window.ethereum.request({
-//       method: "eth_chainId",
-//     });
-//     handleChainChanged(chainId);
-
-//     window.ethereum.on("chainChanged", async () => {
-//       const chainId = await window.ethereum.request({
-//         method: "eth_chainId",
-//       });
-//       handleChainChanged(chainId);
-//     });
-
-//     const initializedUser = await PushAPI.initialize(signer, {
-//       env: CONSTANTS.ENV.STAGING,
-//     });
-//     setUser(initializedUser);
-
-//     const subscriptions = await initializedUser.notification.subscriptions();
-//     const isSubscribed = subscriptions.some((sub: any) => sub.channel.toLowerCase() === channelAddress.toLowerCase());
-//     if (!isSubscribed) {
-//       await initializedUser.notification.subscribe(`eip155:11155111:${channelAddress}`);
 //     }
-
-//     await initRealTimeNotificationStream(initializedUser);
 //   };
 
 //   useEffect(() => {
-//     connectWallet();
-//   }, []);
+//     const connectAndSubscribe = async (signer: any) => {
+//       try {
+//         if (isConnected && address) {
+//           console.log(data);
+//           console.log(`wallet ${address} is connected`);
+//           // useWalletClient 훅의 결과인 data를 PushAPI.initialize에 전달합니다.
+//           const initializedUser = await PushAPI.initialize(signer, {
+//             env: CONSTANTS.ENV.STAGING,
+//           });
+//           setUser(initializedUser);
 
-//   useEffect(() => {
-//     const handleAccountsChanged = async (accounts: string[]) => {
-//       if (accounts.length > 0) {
-//         const newSigner = new ethers.providers.Web3Provider(window.ethereum).getSigner();
-//         const preserved = accounts.map(e => ethers.utils.getAddress(e));
-//         const newUser = await PushAPI.initialize(newSigner, {
-//           env: CONSTANTS.ENV.PROD,
-//         });
-//         setUser(newUser);
-//         setSellerWallets({
-//           walletAddress: preserved[0],
-//           isSubscribed: true,
-//         });
-//         console.log(sellerWallets);
+//           const subscriptions = await initializedUser.notification.subscriptions();
+//           const isSubscribed = subscriptions.some(
+//             (sub: any) => sub.channel.toLowerCase() === channelAddress.toLowerCase(),
+//           );
+//           if (!isSubscribed) {
+//             await initializedUser.notification.subscribe(`eip155:11155111:${channelAddress}`);
+//           }
 
-//         if (streamInstance) {
-//           streamInstance.disconnect();
-//           setStreamInstance(null);
+//           await initRealTimeNotificationStream(initializedUser);
 //         }
-
-//         await initRealTimeNotificationStream(newUser);
-//       } else {
-//         setUser(null);
-//         setSellerWallets({ walletAddress: "", isSubscribed: false });
-//         if (streamInstance) {
-//           streamInstance.disconnect();
-//           setStreamInstance(null);
-//         }
+//       } catch (error) {
+//         console.error("연결 및 구독 중 오류 발생:", error);
 //       }
 //     };
 
-//     if (window.ethereum) {
-//       window.ethereum.on("accountsChanged", handleAccountsChanged);
+//     connectAndSubscribe(signer);
+//   }, [isConnected, address, result1]); // useEffect 의존성 배열에 data 추가
 
-//       return () => {
-//         window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
-//       };
-//     } else {
-//       console.error("메타마스크를 설치해주세요.");
-//       // 메타마스크가 설치되어 있지 않음을 사용자에게 알리는 로직을 추가할 수 있습니다.
-//     }
-//   }, [streamInstance, user]);
-
-//   // 컴포넌트 언마운트 시 스트림 인스턴스 연결 해제
-//   useEffect(() => {
-//     return () => {
-//       if (streamInstance) {
-//         console.log("컴포넌트 언마운트 시 스트림 인스턴스 연결 해제");
-//         streamInstance.disconnect();
-//       }
-//     };
-//   }, [streamInstance]);
-
-//   return {
-//     connectWallet,
-//     notificationData,
-//   };
+//   return { isConnected, notificationData, streamInstance, user };
 // };
 
 // export default useWalletAndSubscribe;
