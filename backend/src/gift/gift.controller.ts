@@ -29,7 +29,7 @@ import { VerifiableCredential } from '@veramo/core';
 import { QueryCredentialsRequestResult } from '@blockchain-lab-um/masca-connector';
 import { State } from 'src/common/enum/state.enum';
 
-@ApiTags('Account | Gift')
+@ApiTags('Gift')
 @Controller('gift')
 export class GiftController {
   constructor(private readonly giftService: GiftService) {}
