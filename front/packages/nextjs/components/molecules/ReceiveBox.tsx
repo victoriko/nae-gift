@@ -45,7 +45,7 @@ const ReceiveBox: React.FC<GiftListData> = ({ receivedItem }) => {
   const confirm = async () => {
     try {
       setLoading(true);
-      const confirmUrl = `${process.env.REACT_APP_API}/gift/${receivedItem.id}/confirm`;
+      const confirmUrl = `${process.env.NEXT_PUBLIC_API_URL}/gift/${receivedItem.id}/confirm`;
       const confirmRes = await axios.patch(confirmUrl);
       console.log("confirmed result: ", confirmRes);
       if (confirmRes.data.success) {
@@ -87,7 +87,7 @@ const ReceiveBox: React.FC<GiftListData> = ({ receivedItem }) => {
       });
       console.log("verification at the front", verifyTest);
 
-      const verifyRes = await axios.patch(`${process.env.REACT_APP_API}/gift/${receivedItem.id}/use`, targetVc);
+      const verifyRes = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/gift/${receivedItem.id}/use`, targetVc);
       console.log("verified result: ", verifyRes);
 
       if (verifyRes.data.success) {
@@ -120,7 +120,7 @@ const ReceiveBox: React.FC<GiftListData> = ({ receivedItem }) => {
       console.log("api was fed an account address: ", mascaApi);
 
       const { message, signature } = await runEthers(receivedItem.title, receivedItem.content, receivedItem.price);
-      const response = await axios.patch(`${process.env.REACT_APP_API}/gift/${receivedItem.id}/receive`, {
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/gift/${receivedItem.id}/receive`, {
         signature,
         title: message.title,
         content: message.content,
@@ -130,7 +130,7 @@ const ReceiveBox: React.FC<GiftListData> = ({ receivedItem }) => {
       const saveVC = await mascaApi.saveCredential(response.data);
       console.log("VC saved: ", saveVC);
 
-      const issueVcUrl = `${process.env.REACT_APP_API}/gift/${receivedItem.id}/issue`;
+      const issueVcUrl = `${process.env.NEXT_PUBLIC_API_URL}/gift/${receivedItem.id}/issue`;
       const successRes = await axios.post(issueVcUrl, {
         success: saveVC.success,
       });

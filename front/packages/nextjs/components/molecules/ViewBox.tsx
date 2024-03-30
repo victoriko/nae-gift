@@ -47,7 +47,7 @@ const ViewBox: React.FC<viewBoxData> = ({ product, userWalletAddress }) => {
         formData.append("file", imageFile);
       }
 
-      const response = await axios.put(`${process.env.REACT_APP_API}/product/${productId}`, formData, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/product/${productId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -65,7 +65,7 @@ const ViewBox: React.FC<viewBoxData> = ({ product, userWalletAddress }) => {
     try {
       const { signature } = await runEthers("delete", "delete", "delete");
       if (product.seller === userWalletAddress) {
-        const response = await axios.delete(`${process.env.REACT_APP_API}/product/${productId}`, {
+        const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/product/${productId}`, {
           headers: {
             "Content-Type": "application/json",
             Accept: "*/*",

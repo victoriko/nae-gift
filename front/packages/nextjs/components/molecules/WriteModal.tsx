@@ -32,7 +32,7 @@ const WriteModal: React.FC<ModalProps> = ({ onClose, title, content, file, price
     //   formData.append("price", ethPrice);
     //   formData.append("signature", signature);
     //   const response = await axios.post(
-    //     `${process.env.REACT_APP_API}/product`,
+    //     `${process.env.NEXT_PUBLIC_API_URL}/product`,
     //     formData,
     //     {
     //       headers: {
