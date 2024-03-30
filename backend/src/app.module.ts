@@ -4,12 +4,13 @@ import { ProductModel } from './common/entity/product.entity';
 import { GiftModel } from './common/entity/gift.entity';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { PaginationModule } from './pagination/pagination.module';
-import { ImageModule } from './image/image.module';
-import { VcModule } from './vc/vc.module';
-import { NotificationModule } from './notification/notification.module';
 import { ProductModule } from './product/product.module';
 import { GiftModule } from './gift/gift.module';
+import { PaginationModule } from './services/pagination/pagination.module';
+import { ImageModule } from './services/image/image.module';
+import { VcModule } from './services/vc/vc.module';
+import { NotificationModule } from './services/notification/notification.module';
+import { PaginationService } from './services/pagination/pagination.service';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { GiftModule } from './gift/gift.module';
       entities: [ProductModel, GiftModel],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([ProductModel]),
     PaginationModule,
     ImageModule,
     VcModule,
@@ -31,6 +33,6 @@ import { GiftModule } from './gift/gift.module';
     GiftModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PaginationService],
 })
 export class AppModule {}
