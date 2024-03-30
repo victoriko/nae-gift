@@ -1,9 +1,9 @@
-// SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 import "./Escrow.sol";
 
-contract NaegiftEscrowProxy {
+contract EscrowProxy {
     address public latestEscrow;
     address public escrowImplementation;
 
