@@ -6,9 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "node --max-old-space-size=4096 ./node_modules/.bin/nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "node --trace-warnings --max-old-space-size=4096 ./node_modules/.bin/nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -20,22 +20,39 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@blockchain-lab-um/masca-connector": "^1.2.1",
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.2.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
-    "@nestjs/serve-static": "^4.0.2",
-    "@nestjs/swagger": "^7.3.1",
+    "@nestjs/serve-static": "^4.0.1",
+    "@nestjs/swagger": "^7.3.0",
     "@nestjs/typeorm": "^10.0.2",
+    "@pushprotocol/restapi": "^1.6.10",
+    "@veramo/core": "^5.6.0",
+    "@veramo/credential-eip712": "^5.6.0",
+    "@veramo/credential-status": "^5.6.0",
+    "@veramo/credential-w3c": "^5.6.0",
+    "@veramo/data-store": "^5.6.0",
+    "@veramo/did-manager": "^5.6.0",
+    "@veramo/did-provider-ethr": "^5.6.0",
+    "@veramo/did-resolver": "^5.6.0",
+    "@veramo/key-manager": "^5.6.0",
+    "@veramo/kms-local": "^5.6.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "did-resolver": "^4.1.0",
     "ethers": "^5.7.2",
+    "ethr-did-resolver": "^10.1.5",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "swagger-ui-express": "^5.0.0",
+    "sqlite3": "^5.1.7",
+    "tsimportlib": "^0.0.5",
     "typeorm": "^0.3.20",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "web-did-resolver": "^2.0.27"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -45,7 +62,7 @@
     "@types/jest": "^29.5.2",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.3.1",
-    "@types/supertest": "^6.0.0",
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -73,10 +90,19 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "lines": 90
+      }
+    },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.(controller|service).(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    }
   }
 }

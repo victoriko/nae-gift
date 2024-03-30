@@ -12,9 +12,11 @@ import { VcModule } from './services/vc/vc.module';
 import { NotificationModule } from './services/notification/notification.module';
 import { PaginationService } from './services/pagination/pagination.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOSTNAME,

@@ -8,10 +8,10 @@ export class GiftModel extends ProductModel {
   uuid: string;
 
   @Column()
-  gifter: string;
+  buyer: string;
 
   @Column()
-  giftee: string;
+  receiver: string;
 
   @Column()
   state: State;

@@ -12,7 +12,7 @@ import { Repository } from 'typeorm';
 import { ethers } from 'ethers';
 import { ReqPayProduct } from './dto/req-pay-product.dto';
 import { ResPayProduct } from './dto/res-pay-product.dto';
-import { ESCROW_ABI } from 'src/common/abi/abi';
+import { ESCROW_ABI } from 'src/common/abi/escrow.abi';
 import { GiftModel } from 'src/common/entity/gift.entity';
 import { ImageService } from 'src/services/image/image.service';
 import { ReqPutProduct } from './dto/req-put-product.dto';
