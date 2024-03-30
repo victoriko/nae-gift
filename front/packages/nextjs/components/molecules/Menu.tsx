@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { logo } from "../../images";
 import { cn } from "../../utils/cn";
 import Button from "../atoms/button";
 
@@ -46,11 +45,11 @@ const Menu: React.FC<HeaderProps> = ({ setMenu, menu }) => {
         className="flex flex-row py-10 gap-6 justify-center items-center mobile:flex-col mobile:pr-16 "
         onClick={linkClick}
       >
-        <Button variant="sendBtn2" size="mdl" label="상품등록하기" />
+        <Button variant="sendBtn2" size="mdl" label="Adding" />
 
         <Button variant="sendBtn2" size="mdl" label="SELLER" />
 
-        <Button variant="sendBtn2" size="mdl" label="선물함" />
+        <Button variant="sendBtn2" size="mdl" label="Gift Box" />
       </div>
     </div>
   );
