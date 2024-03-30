@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
-pragma solidity >=0.8.0 <0.9.0;
+pragma solidity ^0.8.20;
 
-contract NaegiftEscrow {
+contract Escrow {
     enum ContractChoices{
         ACTIVE,
         FULFILLED,
@@ -79,5 +79,3 @@ contract NaegiftEscrow {
 
     receive() external payable{}
 }
-
-s
