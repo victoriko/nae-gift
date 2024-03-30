@@ -219,7 +219,11 @@ export class GiftService {
           toBlock,
         );
 
-        if (allEvents.length) {
+        const filteredEvents = allEvents.filter(
+          (event) => event.args.uuid === gift.uuid,
+        );
+
+        if (filteredEvents.length) {
           console.log(allEvents, 'Fulfilled by past event reference.');
           await this.giftRepo.update(id, { state: State.FULFILLED });
           await this.notificationService.sendNotification(
@@ -285,7 +289,11 @@ export class GiftService {
       toBlock,
     );
 
-    if (allEvents.length) {
+    const filteredEvents = allEvents.filter(
+      (event) => event.args.uuid === gift.uuid,
+    );
+
+    if (filteredEvents.length) {
       console.log(allEvents, 'Fulfilled by past event reference.');
       await this.giftRepo.update(id, { state: State.EXECUTED });
     } else {
