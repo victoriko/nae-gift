@@ -8,6 +8,7 @@ import DateTime from "./DateTime";
 import { QueryCredentialsRequestResult, enableMasca } from "@blockchain-lab-um/masca-connector";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
+import { useAccount } from "wagmi";
 
 interface GiftListData {
   receivedItem: Product;
@@ -24,7 +25,7 @@ const states: {
 };
 
 const ReceiveBox: React.FC<GiftListData> = ({ receivedItem }) => {
-  const { walletAddress: address } = useRecoilValue(walletState);
+  const { address } = useAccount();
   const [btnState, setBtnState] = useState<string>("active");
   const [item, setItem] = useState<string>(`Please Press 'Receive Gift'`);
   const [loading, setLoading] = useState<boolean>(false);
@@ -62,7 +63,7 @@ const ReceiveBox: React.FC<GiftListData> = ({ receivedItem }) => {
   const verify = async () => {
     try {
       setLoading(true);
-      const enableResult: any = await enableMasca(address, {
+      const enableResult: any = await enableMasca(address as any, {
         snapId: "npm:@blockchain-lab-um/masca",
         version: "1.2.0-beta.2",
       });
@@ -107,7 +108,7 @@ const ReceiveBox: React.FC<GiftListData> = ({ receivedItem }) => {
   const receiveGift = async () => {
     try {
       setLoading(true);
-      const enableResult: any = await enableMasca(address, {
+      const enableResult: any = await enableMasca(address as any, {
         snapId: "npm:@blockchain-lab-um/masca",
         version: "1.2.0-beta.2",
       });

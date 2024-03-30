@@ -5,9 +5,7 @@ import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithPro
 import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : `http://localhost:${process.env.PORT || 3000}`;
+const baseUrl = process.env.VERCEL_URL ? `${process.env.VERCEL_URL}` : `${process.env.NEXT_PUBLIC_API_URL}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
