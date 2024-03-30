@@ -23,7 +23,7 @@ const ProductBox: React.FC<iProductBox> = ({ product }) => {
           <Image
             className={cn(
               "rounded-tl-lg rounded-tr-lg",
-              "w-[350px] h-[250px]",
+              "w-[300px] h-[300px] object-cover",
               "tablet:w-[240px] tablet:h-[265px]",
               "mobile:w-[250px] mobile:h-[275px]",
             )}
