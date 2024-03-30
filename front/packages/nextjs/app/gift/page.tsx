@@ -36,6 +36,7 @@ const Gift: React.FC = () => {
         setReceiveProduct(receiveResponse.data.gifts);
         setReceiveTotalPage(receiveResponse.data.totalPages);
 
+
         const payUrl = `${process.env.REACT_APP_API}/gift?buyer=${connectedAddress}&page=${payPage}&order=${payOrder}`;
         const payResponse = await axios.get(payUrl);
         setPayProduct(payResponse.data.gifts);

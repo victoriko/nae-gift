@@ -41,7 +41,7 @@ const Home: NextPage = () => {
 
   const mainData = async (page: number) => {
     try {
-      const response = await axios.get<Data>(`${process.env.REACT_APP_API}/?page=${page}&order=${order}`);
+      const response = await axios.get<Data>(`${process.env.NEXT_PUBLIC_API_URL}/?page=${page}&order=${order}`);
 
       setProduct(response.data.products);
       setTotalPage(response.data.totalPages);
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
 
   const latestData = async () => {
     try {
-      const latestRes = await axios.get<Data>(`${process.env.REACT_APP_API}/?page=1&order=desc`);
+      const latestRes = await axios.get<Data>(`${process.env.NEXT_PUBLIC_API_URL}/?page=1&order=desc`);
       console.log(latestRes.data.products);
       setLatestProduct(latestRes.data.products);
     } catch (error) {

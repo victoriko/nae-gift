@@ -73,7 +73,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
       uuid: UUID,
     };
 
-    const payUrl = `${process.env.REACT_APP_API}/product/${id}/pay`;
+    const payUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/${id}/pay`;
     console.log(payUrl, reqBody);
     const response = axios.post(payUrl, reqBody);
 
