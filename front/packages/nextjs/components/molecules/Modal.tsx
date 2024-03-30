@@ -15,6 +15,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import { useRecoilValue } from "recoil";
 import { v4 as uuid } from "uuid";
+import { useAccount } from "wagmi";
 
 interface ModalProps {
   onClose: () => void;
@@ -24,7 +25,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
   const [receiverInput, setReceiverInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const { walletAddress } = useRecoilValue(walletState);
+  const { address: walletAddress } = useAccount();
   const priceETH = formatEther(product.price);
   const navigate = useRouter();
   const { id } = navigate.query;
@@ -44,16 +45,16 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
     const buyer = address;
     const seller = product.seller;
     const receiver = receiverInput;
-    const market = process.env.REACT_APP_MARKET_ADDRESS;
-    console.log(process.env.REACT_APP_MARKET_ADDRESS);
+    const market = process.env.NEXT_PUBLIC_MARKET_ADDRESS;
+    console.log(process.env.NEXT_PUBLIC_MARKET_ADDRESS);
     console.log(market);
 
     setLoading(true);
 
-    const contract = new ethers.Contract(process.env.REACT_APP_PROXY_ADDRESS as any, ESCROW_ABI, provider);
+    const contract = new ethers.Contract(process.env.NEXT_PUBLIC_PROXY_ADDRESS as any, ESCROW_ABI, provider);
 
     const transaction = {
-      to: process.env.REACT_APP_PROXY_ADDRESS,
+      to: process.env.NEXT_PUBLIC_PROXY_ADDRESS,
       data: contract.interface.encodeFunctionData("createEscrow", [
         UUID,
         buyer,
