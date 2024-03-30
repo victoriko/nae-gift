@@ -31,13 +31,12 @@ const Gift: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const receiveUrl = `${process.env.REACT_APP_API}/gift?receiver=${connectedAddress}&page=${receivePage}&order=${receiveOrder}`;
+        const receiveUrl = `${process.env.NEXT_PUBLIC_API_URL}/gift?receiver=${connectedAddress}&page=${receivePage}&order=${receiveOrder}`;
         const receiveResponse = await axios.get(receiveUrl);
         setReceiveProduct(receiveResponse.data.gifts);
         setReceiveTotalPage(receiveResponse.data.totalPages);
 
-
-        const payUrl = `${process.env.REACT_APP_API}/gift?buyer=${connectedAddress}&page=${payPage}&order=${payOrder}`;
+        const payUrl = `${process.env.NEXT_PUBLIC_API_URL}/gift?buyer=${connectedAddress}&page=${payPage}&order=${payOrder}`;
         const payResponse = await axios.get(payUrl);
         setPayProduct(payResponse.data.gifts);
         setPayTotalPage(payResponse.data.totalPages);
