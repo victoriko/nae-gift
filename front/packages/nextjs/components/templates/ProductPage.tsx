@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import ViewBox from "../../components/molecules/ViewBox";
-import ViewDetail from "../../components/molecules/ViewDetail";
-import Loading from "../../components/organisms/Loading";
-import { bannerImg1 } from "../../images/Banner";
+import { useRouter } from "next/navigation";
+import ViewBox from "../molecules/ViewBox";
+import ViewDetail from "../molecules/ViewDetail";
+import Loading from "../organisms/Loading";
+// import { bannerImg1 } from "../../../images/Banner";
 import axios from "axios";
 
 export interface Product {
@@ -19,7 +19,7 @@ export interface Product {
 
 const ProductPage: React.FC = () => {
   const router = useRouter();
-  const { id } = router.query;
+
   const [product, setProduct] = useState<Product>({
     id: 0,
     title: "",
@@ -34,6 +34,8 @@ const ProductPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const id = router;
+        if (!id) return;
         const response = await axios.get<Product>(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`);
         setProduct(response.data);
         setLoading(false);
@@ -61,7 +63,7 @@ const ProductPage: React.FC = () => {
 
     fetchData();
     fetchWalletAddress();
-  }, [id]);
+  }, [router]);
 
   return (
     <div className="mt-24">
