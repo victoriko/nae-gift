@@ -11,6 +11,7 @@ import { ImageModule } from './services/image/image.module';
 import { VcModule } from './services/vc/vc.module';
 import { NotificationModule } from './services/notification/notification.module';
 import { PaginationService } from './services/pagination/pagination.service';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -31,8 +32,12 @@ import { PaginationService } from './services/pagination/pagination.service';
     NotificationModule,
     ProductModule,
     GiftModule,
+    ServeStaticModule.forRoot({
+      rootPath: `${process.cwd()}/public`,
+      serveRoot: '/public',
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService, PaginationService],
+  providers: [AppService],
 })
 export class AppModule {}
