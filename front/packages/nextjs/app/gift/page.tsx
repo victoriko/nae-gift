@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import GiftList from "../../components/templates/GiftList";
-import { walletState } from "../../recoil/walletState";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
-import { Address } from "~~/components/scaffold-eth";
+import { useAccount } from "wagmi";
 
 export interface Product {
   id: number;
@@ -20,6 +18,7 @@ export interface Product {
 }
 
 const Gift: React.FC = () => {
+  const { address: connectedAddress } = useAccount();
   const [receiveProduct, setReceiveProduct] = useState<Product[]>([]);
   const [payProduct, setPayProduct] = useState<Product[]>([]);
   const [receivePage, setReceivePage] = useState<number>(1);
@@ -28,39 +27,27 @@ const Gift: React.FC = () => {
   const [payTotalPage, setPayTotalPage] = useState<number>(1);
   const [receiveOrder, setReceiveOrder] = useState<string>("desc");
   const [payOrder, setPayOrder] = useState<string>("desc");
-  const { walletAddress } = useRecoilValue(walletState);
-  const protocol = window.location.href.split("//")[0] + "//";
-  const recevieGiftData = async (_walletAddress: string, page: number) => {
-    try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/gift?receiver=${_walletAddress}&page=${page}&order=${receiveOrder}`;
-      const response = await axios.get(url);
-      // console.log(`response from ${url}`, response);
-      // console.log(response.data.gifts);
-      setReceiveProduct(response.data.gifts);
-      setReceiveTotalPage(response.data.totalPages);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const payGiftData = async (_walletAddress: string, page: number) => {
-    try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/gift?buyer=${_walletAddress}&page=${page}&order=${payOrder}`;
-      const response = await axios.get(url);
-      // console.log(`response from ${url}`, response);
-      // console.log(response.data.gifts);
-      setPayProduct(response.data.gifts);
-      setPayTotalPage(response.data.totalPages);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const receiveUrl = `${process.env.REACT_APP_API}/gift?receiver=${connectedAddress}&page=${receivePage}&order=${receiveOrder}`;
+        const receiveResponse = await axios.get(receiveUrl);
+        setReceiveProduct(receiveResponse.data.gifts);
+        setReceiveTotalPage(receiveResponse.data.totalPages);
 
-  useEffect((): void => {
-    recevieGiftData(walletAddress, receivePage);
-    payGiftData(walletAddress, payPage);
-  }, [receivePage, payPage, receiveOrder, payOrder, walletAddress]);
 
+        const payUrl = `${process.env.REACT_APP_API}/gift?buyer=${connectedAddress}&page=${payPage}&order=${payOrder}`;
+        const payResponse = await axios.get(payUrl);
+        setPayProduct(payResponse.data.gifts);
+        setPayTotalPage(payResponse.data.totalPages);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [connectedAddress, receivePage, payPage, receiveOrder, payOrder]);
   const receivePageChange = (pageNumber: number) => {
     setReceivePage(pageNumber);
   };
