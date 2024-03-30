@@ -1,3 +1,19 @@
+import { useEffect } from "react";
+import { useAccount } from "wagmi";
+
+const useWalletAndSubscribe = () => {
+  const { address, isConnected } = useAccount();
+  useEffect(() => {
+    if (isConnected) {
+      console.log(`wallet ${address} is connected`);
+    }
+  }, [isConnected, address]);
+
+  return isConnected;
+};
+
+export default useWalletAndSubscribe;
+
 // import { useEffect, useState } from "react";
 // import { streamIdState } from "../recoil/streamState";
 // import { walletState } from "../recoil/walletState";
