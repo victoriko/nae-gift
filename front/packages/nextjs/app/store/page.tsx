@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Button from "../../components/atoms/button";
 import StoreBanner from "../../components/molecules/StoreBanner";
@@ -55,7 +57,7 @@ const MyStoreList: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const [showBanner, setShowBanner] = useState<boolean>(true);
 
-  const protocol = window.location.href.split("//")[0] + "//";
+  //   const protocol = window.location.href.split("//")[0] + "//";
   const changePage = async (pageNumber: number) => {
     setPage(pageNumber);
   };
