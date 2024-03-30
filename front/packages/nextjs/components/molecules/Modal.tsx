@@ -3,7 +3,6 @@ import Image from "next/image";
 // import { useParams } from "react-router";
 import { useParams, useRouter } from "next/navigation";
 import { ESCROW_ABI } from "../../abi/escrow";
-
 import { closeBtn } from "../../images/Icon";
 import { walletState } from "../../recoil/walletState";
 import { cn } from "../../utils/cn";
@@ -41,6 +40,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum as unknown as ExternalProvider);
     const address = walletAddress;
     const signer = provider.getSigner();
+    console.log(signer);
     const UUID = uuid();
 
     const buyer = address;
@@ -86,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
       })
       .catch(error => {
         setLoading(false);
-        alert("The transaction has been canceled");
+        alert("The transaction has been cancelled");
       });
 
     console.log("Transaction sign post body: ", {
@@ -128,7 +128,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
               </button>
             </div>
             <div className="py-2 text-center">
-              <h3 className="text-2xl py-3 text-gray-900 ">{product.title} Send a gift</h3>
+              <h3 className="text-2xl py-3 text-gray-900 ">Sending {product.title} as gift...</h3>
 
               <p className="py-3">Price : {priceETH} ETH </p>
 
@@ -170,7 +170,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
                   <span className="font-bold">Please wait a moment..!</span>
                 </div>
               ) : (
-                <Button onClick={sendGift} variant="sendBtn2" size="lg" label="After payment, send the gift." />
+                <Button onClick={sendGift} variant="sendBtn2" size="lg" label="Pay with MetaMask" />
               )}
             </div>
           </div>

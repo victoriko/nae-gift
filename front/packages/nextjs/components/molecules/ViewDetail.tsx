@@ -9,6 +9,7 @@ const ViewDetail: React.FC = () => {
         "note:px-10 note:w-3/4",
         "tablet:px-10 tablet:w-full",
         "mobile:w-full mobile:flex mobile:flex-col mobile:gap-4",
+        "text-[#82a0b0] bg-[inherit]",
       )}
     >
       <div className=" mobile:font-bold">Instructions</div>
