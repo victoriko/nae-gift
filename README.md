@@ -11,5 +11,4 @@ If the Verifiable Gift Credential corresponding to the very gift exists in MetaM
 A pivotal feature of Naegift is its use of an escrow Smart Contract, designed to safeguard both the Gifter and the Giftee against potential fraud. When a gift is purchased, the payment (in Ether) is temporarily held within the escrow SC. Only upon the Giftee's receipt and acknowledgment of the product is the payment released to the Seller's Ethereum account, ensuring a transparent and secure transaction.
 
 # Nae-gift architecture
-![alt text](<nae-gift architecture.png>)
-
+![alt text](nae-gift_architecture.png)
