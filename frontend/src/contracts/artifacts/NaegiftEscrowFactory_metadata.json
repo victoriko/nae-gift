@@ -1,0 +1,130 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "escrowAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					}
+				],
+				"name": "EscrowCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_buyer",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_seller",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_market",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_contractPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "uuid",
+						"type": "string"
+					}
+				],
+				"name": "createEscrow",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "escrowAddress",
+						"type": "address"
+					}
+				],
+				"name": "existEscrow",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"EscrowFactory.sol": "NaegiftEscrowFactory"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Escrow.sol": {
+			"keccak256": "0xd9e61351eecd7b9ec5e3b80e022e8c4caf73f18dff5d96479767919b1741aa34",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f6c142eb92553c624bbf6778210cc04b62b1e07f4becb7db50f6d34b2fc09340",
+				"dweb:/ipfs/QmVtcHXsrZTHkEkavFSSbQrn7eKRmkWDHCYbKNobXu1nQS"
+			]
+		},
+		"EscrowFactory.sol": {
+			"keccak256": "0x72e31a3279235b3baa567546b6d17a408ad0582b876f0b6eb68c3ec255ed18a7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e75bd667235044717bd02f05ba41a5bbd38a5e8307124515626b807c1e61888c",
+				"dweb:/ipfs/QmcVbJ69N8YN37LoR1zEooLWMtLz578KpDYgVDPeC3rdqW"
+			]
+		}
+	},
+	"version": 1
+}

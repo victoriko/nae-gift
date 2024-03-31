@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   11155111: {
     Escrow: {
-      address: "0xb7A53a98debF2eAc89aD534236fEB6028Bc0A962",
+      address: "0x2D789b269194AD36cC350c6954126F25579556F2",
       abi: [
         {
           anonymous: false,
@@ -105,7 +105,7 @@ const deployedContracts = {
               type: "string",
             },
           ],
-          name: "ConfirmFulfillment",
+          name: "confirmFulfillment",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -118,20 +118,7 @@ const deployedContracts = {
               type: "string",
             },
           ],
-          name: "ConfirmProductUsed",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "string",
-              name: "uuid",
-              type: "string",
-            },
-          ],
-          name: "DistributeFunds",
+          name: "confirmProductUsed",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -185,7 +172,7 @@ const deployedContracts = {
           name: "escrowStatus",
           outputs: [
             {
-              internalType: "enum Escrow.ContractChoices",
+              internalType: "enum Escrow.ContractStateChoices",
               name: "",
               type: "uint8",
             },
@@ -229,8 +216,8 @@ const deployedContracts = {
               type: "uint256",
             },
             {
-              internalType: "enum Escrow.ContractChoices",
-              name: "State",
+              internalType: "enum Escrow.ContractStateChoices",
+              name: "state",
               type: "uint8",
             },
           ],
@@ -245,7 +232,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     EscrowProxy: {
-      address: "0xF4770fc044f679a14131404B213CcbcE9Dd4F5D1",
+      address: "0xfd2aB077a1551Ee9bfd1969a8004baA5a0546b3C",
       abi: [
         {
           inputs: [
