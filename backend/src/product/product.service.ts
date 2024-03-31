@@ -105,10 +105,11 @@ export class ProductService {
     try {
       const { buyer, receiver, uuid } = reqPayProduct;
       let newGift: GiftModel;
-
+      console.log(buyer, receiver, uuid);
       const provider = new ethers.providers.JsonRpcProvider(
         process.env.NETWORK_RPC,
       );
+      console.log(provider);
       const contract = new ethers.Contract(
         process.env.PROXY_CONTRACT,
         ESCROW_ABI,
@@ -129,6 +130,7 @@ export class ProductService {
           fromBlock,
           toBlock,
         );
+        console.log(allEvents);
 
         const filteredEvents = allEvents.filter(
           (event) => event.args.uuid === uuid,

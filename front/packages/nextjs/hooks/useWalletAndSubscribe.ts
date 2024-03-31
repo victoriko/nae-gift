@@ -7,7 +7,6 @@
 //   const [notificationData, setNotificationData] = useState<any[]>([]);
 //   const [streamInstance, setStreamInstance] = useState<any | null>(null);
 //   const [user, setUser] = useState<any | null>(null);
-//   // useWalletClient 훅을 사용하여 현재 연결된 지갑 주소를 매개변수로 전달합니다.
 //   const result1 = useWalletClient({
 //     chainId: 11155111,
 //   });

@@ -1,21 +1,21 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 contract Escrow {
-    enum ContractChoices{
+    enum ContractStateChoices {
         ACTIVE,
         FULFILLED,
         EXECUTED
     }
 
-    struct EscrowData{
+    struct EscrowData {
         address buyer;
         address seller;
         address receiver;
         address market;
         uint256 contractPrice;
-        ContractChoices State;
-        }
+        ContractStateChoices state;
+    }
 
     mapping(string => EscrowData) public escrows;
 
@@ -31,51 +31,51 @@ contract Escrow {
         address _receiver,
         address _market,
         uint256 _contractPrice
-    ) public payable{
+    ) public payable {
         require(msg.value >= _contractPrice, "e002");
         require(msg.sender == _buyer, "e003");
-        require(escrows[uuid].buyer == address(0), "escrow already");
+        require(escrows[uuid].buyer == address(0), "Escrow already exists");
 
-        escrows[uuid]=EscrowData({
+        escrows[uuid] = EscrowData({
             buyer: _buyer,
             seller: _seller,
             receiver: _receiver,
             market: _market,
             contractPrice: _contractPrice,
-            State: ContractChoices.ACTIVE
+            state: ContractStateChoices.ACTIVE
         });
 
         emit EscrowCreated(uuid);
     }
 
-    function ConfirmFulfillment(string memory uuid)public{
-        require(msg.sender == escrows[uuid].market, "e020");
-        require(escrows[uuid].State == ContractChoices.ACTIVE, "e004");
-        escrows[uuid].State = ContractChoices.FULFILLED;
-        emit FulfillmentConfirmed(uuid, escrows[uuid].market);
+    function confirmFulfillment(string memory uuid) external {
+        require(msg.sender == escrows[uuid].market, "e024");
+        require(escrows[uuid].state == ContractStateChoices.ACTIVE, "e013");
+        escrows[uuid].state = ContractStateChoices.FULFILLED;
+        emit FulfillmentConfirmed(uuid, escrows[uuid].receiver);
     }
 
-    function ConfirmProductUsed(string memory uuid) public{
+    function confirmProductUsed(string memory uuid) external {
         require(msg.sender == escrows[uuid].market, "e020");
-        require(escrows[uuid].State == ContractChoices.FULFILLED, "e005");
-        escrows[uuid].State = ContractChoices.EXECUTED;
-        emit ProductUsedConfirmed(uuid, escrows[uuid].receiver);
-        DistributeFunds(uuid);
+        require(escrows[uuid].state == ContractStateChoices.FULFILLED, "e021");
+        escrows[uuid].state = ContractStateChoices.EXECUTED;
+        emit ProductUsedConfirmed(uuid, escrows[uuid].market);
+        distributeFunds(uuid);
     }
 
-    function DistributeFunds(string memory uuid) public{
-        require(escrows[uuid].State == ContractChoices.EXECUTED, "e006");
+    function distributeFunds(string memory uuid) private {
+        require(escrows[uuid].state == ContractStateChoices.EXECUTED, "e022");
         EscrowData storage escrow = escrows[uuid];
-        uint256 marketShare = escrow.contractPrice /10;
+        uint256 marketShare = escrow.contractPrice / 10;
         uint256 sellerShare = escrow.contractPrice - marketShare;
         payable(escrow.market).transfer(marketShare);
         payable(escrow.seller).transfer(sellerShare);
         emit FundsDistributed(uuid, escrow.market, marketShare, escrow.seller, sellerShare);
-        }
-
-    function escrowStatus(string memory uuid) public view returns(ContractChoices){
-        return escrows[uuid].State;
     }
 
-    receive() external payable{}
+    function escrowStatus(string memory uuid) external view returns(ContractStateChoices) {
+        return escrows[uuid].state;
+    }
+
+    receive() external payable {}
 }

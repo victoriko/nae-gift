@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
-// import { useParams } from "react-router";
 import { useParams, useRouter } from "next/navigation";
 import { ESCROW_ABI } from "../../abi/escrow";
 import { closeBtn } from "../../images/Icon";
-import { walletState } from "../../recoil/walletState";
 import { cn } from "../../utils/cn";
 import Button from "../atoms/button";
 import Inputs from "../atoms/inputs";
 import { Product } from "../templates/ProductPage";
-import { ExternalProvider } from "@ethersproject/providers";
-import { formatEther } from "@ethersproject/units";
-import axios from "axios";
+import { formatEther, parseEther } from "@ethersproject/units";
 import { ethers } from "ethers";
-import { useRecoilValue } from "recoil";
 import { v4 as uuid } from "uuid";
 import { useAccount } from "wagmi";
+import { useScaffoldContractWrite, useScaffoldEventSubscriber } from "~~/hooks/scaffold-eth";
 
 interface ModalProps {
   onClose: () => void;
@@ -25,95 +21,56 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
   const [receiverInput, setReceiverInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const { address: walletAddress } = useAccount();
+  const { address: walletAddress, isConnected } = useAccount();
   const priceETH = formatEther(product.price);
   const navigate = useRouter();
   const { id } = useParams();
+  const UUID = uuid();
 
-  const protocol = window.location.href.split("//")[0] + "//";
+  const { write: createEscrowWrite, isLoading: isCreateEscrowLoading } = useScaffoldContractWrite({
+    contractName: "Escrow",
+    functionName: "createEscrow",
+    args: [
+      UUID,
+      walletAddress,
+      product.seller,
+      receiverInput,
+      process.env.NEXT_PUBLIC_MARKET_ADDRESS,
+      parseEther(priceETH),
+    ],
+    value: BigInt(parseEther(priceETH).toString()),
+  });
 
-  const runEthers = async () => {
-    if (!window.ethereum) {
+  useScaffoldEventSubscriber({
+    contractName: "Escrow",
+    eventName: "EscrowCreated",
+    listener: () => {
+      navigate.push("/gift");
+    },
+  });
+
+  const sendGift = async () => {
+    if (!isConnected) {
       alert("Ethereum wallet not found.");
       return;
     }
-    const provider = new ethers.providers.Web3Provider(window.ethereum as unknown as ExternalProvider);
-    const address = walletAddress;
-    const signer = provider.getSigner();
-    console.log(signer);
-    const UUID = uuid();
 
-    const buyer = address;
-    const seller = product.seller;
-    const receiver = receiverInput;
-    const market = process.env.NEXT_PUBLIC_MARKET_ADDRESS;
-    console.log(process.env.NEXT_PUBLIC_MARKET_ADDRESS);
-    console.log(market);
+    if (receiverInput.trim() === "") {
+      alert("Please enter the recipient's wallet address.");
+      return;
+    }
 
     setLoading(true);
 
-    const contract = new ethers.Contract(process.env.NEXT_PUBLIC_PROXY_ADDRESS as any, ESCROW_ABI, provider);
+    alert("sending gift now. please wait.");
 
-    const transaction = {
-      to: process.env.NEXT_PUBLIC_PROXY_ADDRESS,
-      data: contract.interface.encodeFunctionData("createEscrow", [
-        UUID,
-        buyer,
-        seller,
-        receiver,
-        market,
-        ethers.utils.parseUnits(priceETH, "ether").toString(),
-      ]),
-      value: ethers.utils.parseUnits(priceETH, "ether").toString(),
-      gasLimit: 3000000,
-    };
-    console.log(transaction);
-
-    const reqBody = {
-      buyer,
-      receiver,
-      uuid: UUID,
-    };
-
-    const payUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/${id}/pay`;
-    console.log(payUrl, reqBody);
-    const response = axios.post(payUrl, reqBody);
-
-    signer
-      .sendTransaction(transaction)
-      .then(response => {
-        // Handle the successful transaction here
-      })
-      .catch(error => {
-        setLoading(false);
-        alert("The transaction has been cancelled");
-      });
-
-    console.log("Transaction sign post body: ", {
-      buyer,
-      receiver,
-      uuid: UUID,
-    });
-
-    console.log(response);
-
-    if (await response) {
-      alert("Your gift has been sent successfully! Moving to the gift box");
-      navigate.push("/gift");
-    }
-    // } catch (error) {
-    //   console.log("선물보내기에서 오류", error);
-    //   alert("선물을 보내지못했습니다ㅠㅠ");
-    // } finally {
-    //   setLoading(false);
-    // }
-  };
-
-  const sendGift = async () => {
-    if (receiverInput.trim() !== "") {
-      await runEthers();
-    } else {
-      alert("Please enter the recipient's wallet address.");
+    try {
+      await createEscrowWrite();
+    } catch (error) {
+      console.error("Error sending gift:", error);
+      alert("cancle transaction");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -129,9 +86,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
             </div>
             <div className="py-2 text-center">
               <h3 className="text-2xl py-3 text-gray-900 ">Sending {product.title} as gift...</h3>
-
               <p className="py-3">Price : {priceETH} ETH </p>
-
               <Inputs
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReceiverInput(e.target.value)}
                 type="text"
@@ -147,27 +102,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, product }) => {
                     "w-[300px] h-[50px] text-[20px] text-white rounded-xl bg-gradient-to-r from-[#ec4609] to-[#FFA787]",
                   )}
                 >
-                  <svg
-                    className="animate-spin -ml-1 mr-3 h-8 w-8 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                  <span className="font-bold">Please wait a moment..!</span>
+                  {/* Loading spinner and text */}
                 </div>
               ) : (
                 <Button onClick={sendGift} variant="sendBtn2" size="lg" label="Pay with MetaMask" />
