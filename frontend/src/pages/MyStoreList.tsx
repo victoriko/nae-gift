@@ -101,7 +101,7 @@ const MyStoreList: React.FC = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get<Data>(
-        `${process.env.REACT_APP_API}/store?seller=${seller}&page=${page}&order=${order}`
+        `${process.env.REACT_APP_AWS}/store?seller=${seller}&page=${page}&order=${order}`
       );
 
       setTotalPage(response.data.totalPages);
