@@ -1,0 +1,90 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@blockchain-lab-um/masca-connector": "^1.2.1",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@pushprotocol/restapi": "^1.6.8",
+    "@pushprotocol/uiweb": "^1.2.5",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.82",
+    "@types/react": "^18.2.57",
+    "@types/react-dom": "^18.2.19",
+    "@types/react-js-pagination": "^3.0.7",
+    "@types/react-slick": "^0.23.13",
+    "@veramo/core": "^5.6.0",
+    "axios": "^0.27.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "dotenv": "^16.4.5",
+    "prettier": "^2.0.5",
+    "prettier-plugin-solidity": "^1.0.0-beta.13",
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-js-pagination": "^3.0.3",
+    "react-router-dom": "^6.22.1",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
+    "react-toastify": "^10.0.4",
+    "recoil": "^0.7.7",
+    "recoil-persist": "^5.1.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.8",
+    "tailwind-merge": "^2.2.1",
+    "typescript": "^4.9.5",
+    "uuid": "^9.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "@types/uuid": "^9.0.8",
+    "assert": "^2.1.0",
+    "autoprefixer": "^10.4.17",
+    "browserify-zlib": "^0.2.0",
+    "chai": "^4.4.1",
+    "crypto-browserify": "^3.12.0",
+    "ethereum-waffle": "^4.0.10",
+    "ethers": "^5.7.0",
+    "hardhat": "^2.22.2",
+    "hardhat-deploy": "^0.12.2",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.4.35",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "tailwindcss": "^3.4.1",
+    "url": "^0.11.3"
+  }
+}

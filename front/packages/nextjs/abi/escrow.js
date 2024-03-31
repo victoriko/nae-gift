@@ -95,7 +95,7 @@ export const ESCROW_ABI = [
         type: "string",
       },
     ],
-    name: "confirmFulfillment",
+    name: "ConfirmFulfillment",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -108,7 +108,20 @@ export const ESCROW_ABI = [
         type: "string",
       },
     ],
-    name: "confirmProductUsed",
+    name: "ConfirmProductUsed",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "uuid",
+        type: "string",
+      },
+    ],
+    name: "DistributeFunds",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -162,7 +175,7 @@ export const ESCROW_ABI = [
     name: "escrowStatus",
     outputs: [
       {
-        internalType: "enum NaegiftEscrow.ContractStateChoices",
+        internalType: "enum Escrow.ContractChoices",
         name: "",
         type: "uint8",
       },
@@ -206,8 +219,8 @@ export const ESCROW_ABI = [
         type: "uint256",
       },
       {
-        internalType: "enum NaegiftEscrow.ContractStateChoices",
-        name: "state",
+        internalType: "enum Escrow.ContractChoices",
+        name: "State",
         type: "uint8",
       },
     ],
@@ -218,4 +231,4 @@ export const ESCROW_ABI = [
     stateMutability: "payable",
     type: "receive",
   },
-];
+]

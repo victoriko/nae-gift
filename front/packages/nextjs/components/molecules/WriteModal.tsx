@@ -42,7 +42,7 @@ const WriteModal: React.FC<ModalProps> = ({ onClose, title, content, file, price
       const productId = response.data.id;
       console.log("productId", productId);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         const productId = response.data.id;
         console.log("productId", productId);
         router.push(`/product/${productId}`);
